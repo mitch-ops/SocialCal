@@ -12,10 +12,11 @@ class UserSerializer(serializers.ModelSerializer):
 
 # Serializer for registering
 class RegisterSerializer(serializers.ModelSerializer):
-    model = User
-    fields = ('id', 'username', 'email', 'password', 'first_name', 'last_name')
-    # Tell django we want to accept password when creating a new user, but don't want to return the password
-    extra_kwargs = {'password': {'write_only': True}}
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email', 'password', 'first_name', 'last_name')
+        # Tell django we want to accept password when creating a new user, but don't want to return the password
+        extra_kwargs = {'password': {'write_only': True}}
 
     # To create a new version of this user, accept in validated data (username and password)
     def create(self, validated_data):
