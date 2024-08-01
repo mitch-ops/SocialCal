@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import Token
+from .models import Activity, Friendship
 
 # Inherit ModelSerializer
 class UserSerializer(serializers.ModelSerializer):
@@ -35,3 +36,8 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         token = super().get_token(user)
         token['username'] = user.username # adds username claim to token payload
         return token
+
+# Serializers for the activity and friendship models from models.py
+class ActivitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Avtivity
