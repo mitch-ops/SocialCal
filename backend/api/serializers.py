@@ -40,4 +40,10 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 # Serializers for the activity and friendship models from models.py
 class ActivitySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Avtivity
+        model = Activity
+        fields = {'id', 'title', 'description', 'start_time', 'end_time', 'user'}
+
+class FriendshipSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Friendship
+        fields = {'id', 'user', 'friend'}

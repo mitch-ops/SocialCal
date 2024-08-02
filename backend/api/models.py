@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Activity model
-class activity(models.Model):
+class Activity(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
     start_time = models.DateTimeField()
