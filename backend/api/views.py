@@ -44,7 +44,7 @@ class ActivityDetailView(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         return self.queryset.filter(user=self.request.user) # gets the activity created by this user
     
-class FriendshipDetailView(generics.ListCreateAPIView):
+class FriendshipListCreateView(generics.ListCreateAPIView):
     queryset = Friendship.objects.all()
     serializer_class = FriendshipSerializer
     permission_classes = (IsAuthenticated,)
