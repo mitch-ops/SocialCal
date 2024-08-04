@@ -2,7 +2,7 @@ import { useState } from 'react';
 import api from '../api';
 import { useNavigate } from 'react-router-dom';
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '../constants';
-import '../styles/form.css';
+import '../styles/Form.css';
 
 /**
  * This function has two props, route and method
@@ -59,7 +59,7 @@ function Form({ route, method }) {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder='Password'
             />
-            <button className='form-button' type='submit' />
+            <button className='form-button' type='submit'>{loading ? 'Loading...' : 'Submit'}</button>
         </form>
     );
 }

@@ -1,4 +1,4 @@
-import axios from 'asxios';
+import axios from 'axios';
 import { ACCESS_TOKEN } from './constants';
 
 // Url of our backend server
