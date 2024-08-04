@@ -4,6 +4,10 @@ import api from '../api';
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '../constants';
 import { useState, useEffect } from 'react';
 
+/*
+* Wrapper for a protected route, this for something where we need an auth
+* token to access a route
+*/
 function PrivateRoute({ children }) {
     const [isAuthenticated, setIsAuthorized] = useState(null);
 
