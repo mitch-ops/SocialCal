@@ -14,11 +14,11 @@ function App() {
     <div>
       <TabBar />
       <Routes>
-        <Route path="/login" element={Login} />
-        <Route path="/register" element={Register} />
-        <PrivateRoute path="/calendar" element={Calendar} />
-        <PrivateRoute path="/create" element={CreateActivity} />
-        <PrivateRoute path="/friends" element={Friends} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/calendar" element={<PrivateRoute component={Calendar} />} />
+        <Route path="/create" element={<PrivateRoute component={CreateActivity} />} />
+        <Route path="/friends" element={<PrivateRoute component={Friends} />} />
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </div>
