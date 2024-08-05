@@ -29,6 +29,6 @@ function TabBar() {
             </ul>
         </nav>
     );
-};
+}
 
 export default TabBar;
