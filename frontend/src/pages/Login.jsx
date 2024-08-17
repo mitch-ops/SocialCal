@@ -18,7 +18,7 @@ function Login() {
 
         // api request for loggin in
         try {
-            const response = await api.post('./auth/login', { username, password });
+            const response = await api.post('/api/auth/login/', { username, password });
             localStorage.setItem(ACCESS_TOKEN, response.data.access);
             localStorage.setItem(REFRESH_TOKEN, response.data.refresh);
             navigate('/calendar');

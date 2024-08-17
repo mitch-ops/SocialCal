@@ -14,12 +14,12 @@ function Register() {
     const handleSubmit = async (e) => {
         setLoading(true);
         // prevents us from submitting the form and reloading the page (removes deafault behavior)
-        e.preventDafault();
+        e.preventDefault();
 
         // api request for registering
         try {
             // post it to the backend
-            await api.post('./auth/register', { username, email, password, first_name: firstName, last_name: lastName })
+            await api.post('/api/auth/register/', { username, email, password, first_name: firstName, last_name: lastName })
             navigate('login/');
         } catch (error) {
             console.error('Register Failed:', error);
