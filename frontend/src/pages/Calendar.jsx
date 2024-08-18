@@ -4,6 +4,7 @@ import moment from 'moment';
 import api from '../api';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
+// handles date and time for react-big-calendar to use localization
 const localizer = momentLocalizer(moment);
 
 function Calendar() {

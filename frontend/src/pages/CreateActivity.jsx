@@ -12,6 +12,11 @@ function CreateActivity() {
         e.preventDefault();
         // api post for all thoses attributes
         try {
+
+            // // Format the date to ISO 8601 format first
+            // const formattedStartTime = new Date(startTime).toISOString();
+            // const formattedEndTime = new Date(endTime).toISOString();
+
             await api.post('api/activities/', {
                 title,
                 description,
@@ -21,6 +26,13 @@ function CreateActivity() {
             });
             alert('Activity created successfully');
         } catch (error) {
+            // if (error.response) {
+            //     console.error('Error response data:', error.response.data);
+            //     console.error('Error status:', error.response.status);
+            //     console.error('Error headers:', error.response.headers);
+            // } else {
+            //     console.error('Error message:', error.message);
+            // }
             console.error('Failed to create activity:', error);
         }
     };

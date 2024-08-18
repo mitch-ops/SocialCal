@@ -31,10 +31,13 @@ class ActivityListCreateView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
 
     def perform_create(self, serializer):
-        if serializer.is_valid():
-            serializer.save(user=self.request.user)
-        else:
-            print(serializer.errors)
+        serializer.save(user=self.request.user)
+        # try:
+        #     serializer.save(user=self.request.user)
+        # except serializers.validationError as e:
+        #     print("Validation Error:", e.detail)
+        #     raise
+
 
 class ActivityDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Activity.objects.all()

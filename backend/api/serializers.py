@@ -39,9 +39,11 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 # Serializers for the activity and friendship models from models.py
 class ActivitySerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(read_only=True)
+
     class Meta:
         model = Activity
-        fields = ('id', 'title', 'description', 'start_time', 'end_time', 'user')
+        fields = ('id', 'title', 'description', 'start_time', 'end_time', 'user', 'location')
 
 class FriendshipSerializer(serializers.ModelSerializer):
     class Meta:
