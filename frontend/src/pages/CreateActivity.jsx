@@ -9,17 +9,17 @@ function CreateActivity() {
     const [location, setLocation] = useState('');
 
     const handleCreateActivity = async (e) => {
-        e.preventDefaults();
+        e.preventDefault();
         // api post for all thoses attributes
         try {
-            await api.post('activities/', {
+            await api.post('api/activities/', {
                 title,
                 description,
-                startTime,
-                endTime,
+                start_time: startTime,
+                end_time: endTime,
                 location,
             });
-            alert('Activity create successfully');
+            alert('Activity created successfully');
         } catch (error) {
             console.error('Failed to create activity:', error);
         }
@@ -51,7 +51,7 @@ function CreateActivity() {
             <input
                 type='text'
                 placeholder='Location'
-                value={title}
+                value={location}
                 onChange={(e) => setLocation(e.target.value)}
             />
             <button type="submit">Create Activity</button>

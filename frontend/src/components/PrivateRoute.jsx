@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react';
 * token to access a route
 */
 function PrivateRoute({ children }) {
-    const [isAuthenticated, setIsAuthorized] = useState(null);
+    const [isAuthorized, setIsAuthorized] = useState(null);
 
     // this happens as soon as we load a protected route
     useEffect(() => {
@@ -52,11 +52,13 @@ function PrivateRoute({ children }) {
         }
     };
 
-    if (isAuthenticated) {
+    if (isAuthorized === null) {
         return (
             <div>Loading...</div>
-        )
+        );
     }
+
+    return isAuthorized ? children : <Navigate to="/login" />;
 }
 
 export default PrivateRoute;

@@ -16,8 +16,22 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/calendar" element={<PrivateRoute component={Calendar} />} />
-        <Route path="/create" element={<PrivateRoute component={CreateActivity} />} />
+        <Route
+          path="/calendar"
+          element={
+            <PrivateRoute>
+              <Calendar />
+            </PrivateRoute>
+          }
+        />
+        <Route 
+          path="/create" 
+          element={
+            <PrivateRoute>
+              <CreateActivity />
+            </PrivateRoute>
+          } 
+        />
         <Route path="/friends" element={<PrivateRoute component={Friends} />} />
         <Route path="*" element={<NotFound />}></Route>
       </Routes>

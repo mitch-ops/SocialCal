@@ -7,7 +7,7 @@ function Calendar() {
     useEffect(() => {
         const fetchActivities = async () => {
             try {
-                const response = await api.get('activities/');
+                const response = await api.get('api/activities/');
                 setActivites(response.data);
             } catch (error) {
                 console.error('Failed to fetch activities:', error);
