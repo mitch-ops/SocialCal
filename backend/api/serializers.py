@@ -41,9 +41,9 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 class ActivitySerializer(serializers.ModelSerializer):
     class Meta:
         model = Activity
-        fields = {'id', 'title', 'description', 'start_time', 'end_time', 'user'}
+        fields = ('id', 'title', 'description', 'start_time', 'end_time', 'user')
 
 class FriendshipSerializer(serializers.ModelSerializer):
     class Meta:
         model = Friendship
-        fields = {'id', 'user', 'friend'}
+        fields = ('id', 'user', 'friend')

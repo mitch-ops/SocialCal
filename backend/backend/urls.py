@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/auth/register/', RegisterView.as_view(), name='register'),
     path('api/auth/login/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/auth/token/refresh', TokenRefreshView.as_view(), name='refresh'),
+    path('api/auth/token/refresh/', TokenRefreshView.as_view(), name='refresh'),
     path('api-auth/', include('rest_framework.urls')), # not sure if this one is too important
     path('api/', include('api.urls')),
 ]
