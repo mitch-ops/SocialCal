@@ -20,3 +20,19 @@ class Friendship(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.friend.username}"
+
+# FriendRequest model
+class FriendRequest(models.Model):
+    sender = models.ForeignKey(User, related_name="sent_friend_requests", on_delete=models.CASCADE)
+    receiver = models.ForeignKey(User, related_name="received_friend_requests", on_delete=models.CASCADE)
+    timeStamp = models.DateTimeFielda(auto_now_add=True)
+    is_accepted = models.BooleanField(default=False)
+
+    def accept(self):
+        self.is_accepted = True
+        self.save()
+        Friendship.objects.create(user=self.sender, friend=self.receiver)
+        Friendship.objects.create(User=self.receiver, friend=self.sender)
+
+    def reject(self):
+        self.delete()
