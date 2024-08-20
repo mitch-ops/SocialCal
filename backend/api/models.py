@@ -25,7 +25,7 @@ class Friendship(models.Model):
 class FriendRequest(models.Model):
     sender = models.ForeignKey(User, related_name="sent_friend_requests", on_delete=models.CASCADE)
     receiver = models.ForeignKey(User, related_name="received_friend_requests", on_delete=models.CASCADE)
-    timeStamp = models.DateTimeFielda(auto_now_add=True)
+    timeStamp = models.DateTimeField(auto_now_add=True)
     is_accepted = models.BooleanField(default=False)
 
     def accept(self):

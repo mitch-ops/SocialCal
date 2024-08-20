@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
-from rest_framework import generics
+from rest_framework import generics, status
 from .serializers import RegisterSerializer, CustomTokenObtainPairSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
-from .models import Activity, Friendship
-from .serializers import ActivitySerializer, FriendshipSerializer
+from .models import Activity, Friendship, FriendRequest
+from .serializers import ActivitySerializer, FriendshipSerializer, FriendRequestSerializer
 
 # Create your views here.
 # Need view or path to create this user
@@ -62,3 +63,45 @@ class FriendshipDetailView(generics.RetrieveDestroyAPIView):
 
     def get_queryset(self):
         return self.queryset.filter(user=self.request.user)
+    
+####################################################################
+##### views for sending, accpeting, and reject friend requests #####
+####################################################################
+
+# Handling the process of a friend request from one user to another
+class SendFriendRequestView(generics.CreateAPIView):
+    queryset = FriendRequest.objects.all()
+    serializer_class = FriendRequestSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request, *arg, **kwargs):
+        receiver = User.objects.get(id=kwargs['receiver_id'])
+        if FriendRequest.objects.filter(sender=request.user, receiver=receiver).exists():
+            return Response({"detail": "Friend request already sent."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Create a friend request
+        friend_request = FriendRequest(sender=request.user, receiver=receiver)
+        friend_request.save()
+        return Response({"detail": "Friend request sent."}, status=status.HTTP_201_CREATED)
+    
+
+class RespondFriendRequestView(generics.CreateAPIView):
+    queryset = FriendRequest.objects.all()
+    serializer_class = FriendRequestSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def put(self, request, *arg, **kwargs):
+        friend_request = self.get_object()
+        # Check if the logged in user (request.user) is the receiver of the friend request
+        if friend_request.receiver != request.user:
+            return Response({"detail": "Not allowed."}, status=status.HTTP_403_FORBIDDEN)
+        
+        # Retrieves the action field in the http request body
+        action = request.data.get('action')
+        if action == "accept":
+            friend_request.accept()
+            return Response({"detail": "Friend request accepted."})
+        elif action == "reject":
+            friend_request.reject()
+            return Response({"detail": "Friend request rejected."})
+        return Response({"detail": "Invalid action."}, status=status.HTTP_400_BAD_REQUEST)
