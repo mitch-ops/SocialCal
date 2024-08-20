@@ -28,6 +28,7 @@ class FriendRequest(models.Model):
     timeStamp = models.DateTimeField(auto_now_add=True)
     is_accepted = models.BooleanField(default=False)
 
+    # create friendship object for accepted, between the two parties
     def accept(self):
         self.is_accepted = True
         self.save()

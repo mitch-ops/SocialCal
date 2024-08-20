@@ -75,6 +75,7 @@ class SendFriendRequestView(generics.CreateAPIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request, *arg, **kwargs):
+        # keyword arg for the api endpoint (in urls.py)
         receiver = User.objects.get(id=kwargs['receiver_id'])
         if FriendRequest.objects.filter(sender=request.user, receiver=receiver).exists():
             return Response({"detail": "Friend request already sent."}, status=status.HTTP_400_BAD_REQUEST)
@@ -91,6 +92,7 @@ class RespondFriendRequestView(generics.CreateAPIView):
     permission_classes = (IsAuthenticated,)
 
     def put(self, request, *arg, **kwargs):
+        # Fetch friend request based on the pk from the api endpoint
         friend_request = self.get_object()
         # Check if the logged in user (request.user) is the receiver of the friend request
         if friend_request.receiver != request.user:
