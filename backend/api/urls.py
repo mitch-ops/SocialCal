@@ -8,5 +8,5 @@ urlpatterns = [
     path('friends/<int:pk>', views.FriendshipDetailView.as_view(), name="friendship-detail"),
     path('friend-request/send/<int:receiver_id>', views.SendFriendRequestView.as_view(), name='send-friend-request'),
     path('friend-request/respond/<int:pk>', views.RespondFriendRequestView.as_view(), name='respond-friend-request'),
-    path('users/<int:pk>', views.UserProfileView.as_view(), name-'user-profile'),
+    path('users/<int:pk>', views.UserProfileView.as_view(), name='user-profile'),
 ]
