@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 from .models import Activity, Friendship, FriendRequest
-from .serializers import ActivitySerializer, FriendshipSerializer, FriendRequestSerializer
+from .serializers import ActivitySerializer, FriendshipSerializer, FriendRequestSerializer, UserSerializer
 
 # Create your views here.
 # Need view or path to create this user
@@ -107,3 +107,9 @@ class RespondFriendRequestView(generics.CreateAPIView):
             friend_request.reject()
             return Response({"detail": "Friend request rejected."})
         return Response({"detail": "Invalid action."}, status=status.HTTP_400_BAD_REQUEST)
+    
+# Add user profile view to retrieve a user by profile id
+class UserProfileView(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (IsAuthenticated,)
