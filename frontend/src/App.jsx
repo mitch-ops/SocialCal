@@ -8,6 +8,7 @@ import Friends from './pages/Friends';
 import TabBar from './components/TabBar';
 import PrivateRoute from './components/PrivateRoute';
 import NotFound from './pages/NotFound';
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           } 
         />
         <Route path="/friends" element={<PrivateRoute component={Friends} />} />
+        <Route path="/profile/:userId" element={<PrivateRoute component={Profile} />} />
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </div>
