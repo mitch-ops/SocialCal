@@ -113,3 +113,9 @@ class UserProfileView(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (IsAuthenticated,)
+
+# Add a Friend-requests view to list the friend requests
+class FriendRequestsView(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = FriendRequestSerializer
+    permission_classes = (IsAuthenticated,)
