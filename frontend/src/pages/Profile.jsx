@@ -13,7 +13,8 @@ function Profile() {
             try {
                 // fetch the user data
                 // ahhhh I need a user enpoint in the backend now :(
-                const response = await api.get(`/users/${userId}/`);
+                const response = await api.get(`/api/users/${userId}/`);
+                console.log('fetched user: ', response.data);
                 setUser(response.data);
             } catch (error) {
                 console.error('Failed to fetch user:', error);

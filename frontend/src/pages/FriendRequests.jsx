@@ -1,11 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import api from "../api";
 
 function FriendRequests() {
-    const [friendRequests, freindRequestSent] = useState([]);
+    const [friendRequests, setFriendRequests] = useState([]);
 
     useEffect(() => {
-
+        // Fetch the friend requests
+        const fetchFriendRequests = async () => {
+            try {
+                const response = await api.get('/api/friend-requests/');
+                setFriendRequests(response.data);
+            } catch (error) {
+                console.log('Failed to fetch friend-requests', error);
+            }
+        };
+        fetchFriendRequests();
     }, []);
 
     const handleResponse = async (requestId, action) => {
@@ -36,7 +45,8 @@ function FriendRequests() {
                     ))
                 )}
             </ul>
-
         </div>
     );
 }
+
+export default FriendRequests;

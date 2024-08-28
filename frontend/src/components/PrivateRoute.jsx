@@ -22,7 +22,13 @@ function PrivateRoute({ children }) {
         try {
             const response = await api.post('/api/auth/token/refresh/', { refresh: refreshToken, });
             if (response.status == 200) {
-                localStorage.setItem(ACCESS_TOKEN, response.data.access);
+                const accessToken = response.data.access;
+                localStorage.setItem(ACCESS_TOKEN, accessToken);
+
+                // decode the access token to get the userId
+                const decoded = jwtDecode(accessToken);
+                const userId = decoded.user_id;
+                localStorage.setItem('userId', userId);
                 setIsAuthorized(true);
             } else {
                 setIsAuthorized(false);
@@ -48,6 +54,10 @@ function PrivateRoute({ children }) {
         if (tokenExpiration < now) {
             await refreshToken();
         } else {
+            // Token is valid, store userId in local storage
+            const userId = decoded.user_id;
+            localStorage.setItem('userId', userId);
+
             setIsAuthorized(true) // token aint expired
         }
     };

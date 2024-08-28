@@ -8,6 +8,8 @@ function TabBar() {
         localStorage.removeItem(REFRESH_TOKEN);
     };
 
+    const userId = localStorage.getItem('userId');
+
     return(
         <nav>
             <ul>
@@ -20,9 +22,14 @@ function TabBar() {
                 <li>
                     <Link to="/friends">Friends</Link>
                 </li>
-                {/* <li>
-                    <Link to="/profile">Friends</Link>
-                </li> */}
+                {userId && (
+                    <li>
+                        <Link to={`/profile/${userId}`}>Profile</Link>
+                    </li>
+                )}
+                <li>
+                    <Link to="/friend-requests">Friend Requests</Link>
+                </li>
                 <li>
                     <Link to="/login" onClick={handleLogout}>Logout</Link>
                 </li>
