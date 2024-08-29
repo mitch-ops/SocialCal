@@ -114,6 +114,17 @@ class UserProfileView(generics.RetrieveAPIView):
     serializer_class = UserSerializer
     permission_classes = (IsAuthenticated,)
 
+# Add a user search view for the searfh feature for sending friend requests
+class UserSearchView(generics.ListAPIView):
+    serializer_class = UserSerializer
+
+    def get_queryset(self):
+        username = self.request.query_params.get('username', None)
+        if username:
+            return User.objects.filter(username=username)
+        return User.objects.none()
+
+
 # Add a Friend-requests view to list the friend requests
 class FriendRequestsView(generics.RetrieveAPIView):
     queryset = User.objects.all()
