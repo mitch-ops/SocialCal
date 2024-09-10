@@ -11,4 +11,5 @@ urlpatterns = [
     path('friend-request/respond/<int:pk>/', views.RespondFriendRequestView.as_view(), name='respond-friend-request'),
     path('users/<int:pk>/', views.UserProfileView.as_view(), name='user-profile'),
     path('users/', views.UserSearchView.as_view(), name='user-search'),
+    path('auth/user/', views.CurrentUserProfileView.as_view(), name='current-user-profile'),
 ]

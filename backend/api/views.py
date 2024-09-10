@@ -126,7 +126,24 @@ class UserSearchView(generics.ListAPIView):
 
 
 # Add a Friend-requests view to list the friend requests
-class FriendRequestsView(generics.RetrieveAPIView):
-    queryset = User.objects.all()
+# Need to get queryset wher ethe current uer is the receiver and us ListAPIView
+# since we want to retrieve a list of friend requests
+# filter the friend requests to return only those where the logged-in user is the receiver
+class FriendRequestsView(generics.ListAPIView):
     serializer_class = FriendRequestSerializer
     permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        return FriendRequest.objects.filter(receiver=self.request.user)
+
+# View to get the current logged-in user's profile
+class CurrentUserProfileView(generics.RetrieveAPIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        return Response({
+            'id': user.id,
+            'username': user.username,
+            'email': user.email,
+        })
