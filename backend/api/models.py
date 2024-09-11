@@ -33,7 +33,7 @@ class FriendRequest(models.Model):
         self.is_accepted = True
         self.save()
         Friendship.objects.create(user=self.sender, friend=self.receiver)
-        Friendship.objects.create(User=self.receiver, friend=self.sender)
+        Friendship.objects.create(user=self.receiver, friend=self.sender)
 
     def reject(self):
         self.delete()
