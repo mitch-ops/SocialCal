@@ -21,7 +21,7 @@ function FriendRequests() {
         // api call
         try {
             // takes in an aciton
-            await api.put(`/api/friend-request/respond/${requestId}`, { action })
+            await api.put(`/api/friend-request/respond/${requestId}/`, { action })
         } catch (error) {
             console.log(`Failed to ${action} friend request`, error);
         }

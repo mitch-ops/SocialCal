@@ -46,6 +46,8 @@ class ActivitySerializer(serializers.ModelSerializer):
         fields = ('id', 'title', 'description', 'start_time', 'end_time', 'user', 'location')
 
 class FriendshipSerializer(serializers.ModelSerializer):
+    friend = UserSerializer(read_only=True)
+
     class Meta:
         model = Friendship
         fields = ('id', 'user', 'friend')
