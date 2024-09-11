@@ -51,6 +51,10 @@ class FriendshipSerializer(serializers.ModelSerializer):
         fields = ('id', 'user', 'friend')
 
 class FriendRequestSerializer(serializers.ModelSerializer):
+    # Need to serialize the sender and receiver fields properly becaue they are users also
+    sender = UserSerializer()
+    receiver = UserSerializer()
+
     class Meta:
         model = FriendRequest
         fields = ('id', 'sender', 'receiver', 'is_accepted', 'timeStamp')
